@@ -1,0 +1,17 @@
+Package: berdie
+Type: Package
+Title: Berdie
+Version: 0.0.1
+Description: Berdie is an R package for synchronizing data sources across two
+    separate layers.
+Authors@R: c(person("Robert", "Krzyzanowski",
+    email = "technoguyrob@gmail.com", role = c("aut", "cre")))
+Depends:
+    R (>= 3.0.0)
+Suggests:
+    testthat,
+    knitr,
+    devtools
+License: MIT
+LazyData: true
+Roxygen: list(wrap = FALSE)
