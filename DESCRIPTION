@@ -17,5 +17,6 @@ Suggests:
     knitr,
     devtools
 License: MIT
+VignetteBuilder: knitr
 LazyData: true
 Roxygen: list(wrap = FALSE)

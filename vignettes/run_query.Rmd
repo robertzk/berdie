@@ -1,0 +1,59 @@
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{Running queries on a database}
+-->
+
+```{r, echo = FALSE, message = FALSE}
+library(berdie)
+```
+
+# Loading a database connection
+
+Database queries produce results in table format -- a certain number of rows by columns.
+This is essentially a data.frame, so it makes sense to be able to turn queries into
+data.frames given a database connection.
+
+A database connection, like in Rails, is given by a database.yml file. You can pass in 
+the file explicitly to `postgresql_connection`:
+
+```{r, eval = FALSE}
+connection <- postgresql_connection("some/dir/database.yml")
+```
+
+However, it is easier to let the package do its job and set either
+
+- The `database.yml` option with the location of the configuration file.
+  You can ensure this always runs on startup by placing it in your `~/.Rprofile` file
+  with `options(database.yml = "some/dir/database.yml")`.
+
+- Load the syberia package. If a syberia project is already loaded,
+  the current value of `syberia_root()` will be used and the relative
+  file `config/database.yml` will give the database configuration. Thus, if your
+  syberia project is at `some/dir`, the default connection used by Berdie
+  will be the one given by `some/dir/config/database.yml`.
+
+# Running a query on a database
+
+Once you have an open connection, running queries is straightforward:
+
+```{r, eval = FALSE}
+df <- run_query("select * from some_table limit 5", connection)
+# A data.frame with (at most) five rows.
+```
+
+However, you do not have to lug the connection around.
+
+```{r, eval = FALSE}
+df <- run_query("select * from some_table limit 5")
+```
+
+The default is to use the helper function `last_connection()`, which will attempt
+to look for: (1) the previous connection used for a query execution,
+(2) load the connection from the `database.yml` global option, or (3) borrow
+the database.yml file from a syberia project.
+
+Whatever the case, you can always inspect the connection used by the previous query
+by asking for `last_connection()`. If you place `library(syberia)` and `library(berdie)`
+in your `~/.Rprofile` and you have set a default syberia project, you should be able
+to execute `run_query` on starting R without any setup.
+
