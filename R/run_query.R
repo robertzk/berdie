@@ -10,7 +10,7 @@
 run_query <- function(query, conn = last_connection()) { 
   stopifnot(is(conn, 'JDBCConnection')) 
   stopifnot(is.character(query))
-  res <- dbSendQuery(conn, query)
-  fetch(res, n = -1)
+  res <- RJDBC::dbSendQuery(conn, query)
+  RJDBC::fetch(res, n = -1)
 }
 
