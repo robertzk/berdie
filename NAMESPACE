@@ -2,6 +2,7 @@
 
 export(last_connection)
 export(postgresql_connection)
+export(prep_sql)
 export(run_query)
 import(RJDBC)
 import(RPostgreSQL)
