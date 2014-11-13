@@ -1,7 +1,7 @@
 Package: berdie
 Type: Package
 Title: Berdie
-Version: 0.0.1
+Version: 0.0.2
 Description: Berdie is an R package for synchronizing data sources across two
     separate layers.
 Authors@R: c(person("Robert", "Krzyzanowski",
