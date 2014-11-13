@@ -9,7 +9,7 @@
 #' @export
 prep_sql <- function(path_to_query) {
   # Check to see if the Path is actually a query.  If not, parse the file.
-  if (test_is_sql(path_to_query) == FALSE) {
+  if (identical(is.sql(path_to_query), FALSE)) {
    # Read The SQL File
    lines <- readLines(path_to_query)
    # Remove Comments
@@ -26,7 +26,7 @@ prep_sql <- function(path_to_query) {
   sql
 }
 
-test_is_sql <- function(test_string) {
+is.sql <- function(test_string) {
   # Tests for the words "SELECT" and "FROM"
   result <- grepl("SELECT", test_string, ignore.case = TRUE)
   result <- result & grepl("FROM", test_string, ignore.case = TRUE)
