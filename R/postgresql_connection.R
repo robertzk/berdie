@@ -20,7 +20,7 @@
 #'   loading is in progress.
 #' @return JDBCConnection representing the activated PostGreSQL connection.
 #' @export
-postgresql_connection <- function(database.yml, env = 'development',
+postgresql_connection <- memoise::memoise(function(database.yml, env = 'development',
                                   verbose = TRUE, strict = TRUE) {
   if (is.null(database.yml)) { if (strict) stop('database.yml is NULL') else return(NULL) }
   if (!file.exists(database.yml)) {
@@ -35,8 +35,8 @@ postgresql_connection <- function(database.yml, env = 'development',
     stop(pp("Unable to load database settings from config/database.yml ",
             "for environment '#{env}'"))
   config.database <- config.database[[env]]
-  
-  jdbc.jar <- file.path(find.package('berdie'), 'vendor', 'jars', 
+
+  jdbc.jar <- file.path(find.package('berdie'), 'vendor', 'jars',
                         'postgresql-9.2-1003.jdbc4.jar')
   pgsql <- JDBC("org.postgresql.Driver", jdbc.jar, "`")
   stopifnot(all(c('database', 'username') %in% names(config.database)))
@@ -56,6 +56,6 @@ postgresql_connection <- function(database.yml, env = 'development',
   if (verbose) message("* Postgresql connection loaded...\n")
   set_cache(database.connection, 'last_connection')
   database.connection
-}
+})
 
 
