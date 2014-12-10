@@ -18,3 +18,6 @@ last_connection <- function() {
    else NULL)
 }
 
+new_connection <- function() {
+    postgresql_connection(getOption('database.yml'), strict = FALSE)
+}
