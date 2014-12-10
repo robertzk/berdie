@@ -20,7 +20,7 @@
 #'   loading is in progress.
 #' @return JDBCConnection representing the activated PostGreSQL connection.
 #' @export
-postgresql_connection <- memoise::memoise(function(database.yml, env = 'development',
+postgresql_connection <- function(database.yml, env = 'development',
                                   verbose = TRUE, strict = TRUE) {
   if (is.null(database.yml)) { if (strict) stop('database.yml is NULL') else return(NULL) }
   if (!file.exists(database.yml)) {
@@ -56,6 +56,6 @@ postgresql_connection <- memoise::memoise(function(database.yml, env = 'developm
   if (verbose) message("* Postgresql connection loaded...\n")
   set_cache(database.connection, 'last_connection')
   database.connection
-})
+}
 
 
