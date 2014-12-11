@@ -12,26 +12,29 @@
 #'   (If no database connection was used, note this may spin up a new one
 #'   dependending on your configuration. See \code{\link{last_connection}}.)
 run_query <- function(query, conn = last_connection()) {
-  if (missing(query)) return(last_connection())
-  stopifnot(is(conn, 'JDBCConnection')) 
-  stopifnot(is.character(query))
   # Attempts to connect with the database.  If it fails, it will reload the connection and try again.
-  tryCatch({
-      res <- RJDBC::dbSendQuery(conn, query)
-      RJDBC::fetch(res, n = -1)
-    },
+  tryCatch(
+    db_query(query, conn),
     error = function(c) {
       message("* Error Occurred, Reloading Connection...")
       tryCatch({
-          suppressMessages(conn <- postgresql_connection(getOption('database.yml'), strict = FALSE));
-          res <- RJDBC::dbSendQuery(conn, query);
-          RJDBC::fetch(res, n = -1);
-        },
-        error = function(c) {
-          message('* Reloading the Connection did not fix the Error.'); 
-          message(c) 
-        }
+        suppressMessages(conn <- postgresql_connection(getOption('database.yml'), strict = FALSE));
+        db_query(query, conn);
+      },
+      error = function(c) {
+        message('* Reloading the Connection did not fix the Error.'); 
+        message(c) 
+      }
       )
     }
   )
 }
+
+db_query <- function(query, conn = last_connection()) {
+  if (missing(query)) return(last_connection())
+  stopifnot(is(conn, 'JDBCConnection')) 
+  stopifnot(is.character(query))
+  res <- RJDBC::dbSendQuery(conn, query)
+  RJDBC::fetch(res, n = -1)
+}
+
