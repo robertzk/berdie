@@ -1,6 +1,6 @@
 # Version 0.0.3
 
-* Added caching function to fix connection timeouts.
+* Fixed the connection timeout issue
 
 # Version 0.0.2
 

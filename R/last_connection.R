@@ -17,7 +17,3 @@ last_connection <- function() {
        file.path(syberia_root(), 'config', 'database.yml'))
    else NULL)
 }
-
-new_connection <- function() {
-    postgresql_connection(getOption('database.yml'), strict = FALSE)
-}
