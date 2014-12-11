@@ -16,14 +16,16 @@ run_query <- function(query, conn = last_connection()) {
   stopifnot(is(conn, 'JDBCConnection')) 
   stopifnot(is.character(query))
   # Attempts to connect with the database.  If it fails, it will reload the connection once and try again.
-  tryCatch(res <- RJDBC::dbSendQuery(conn, query) +
-               RJDBC::fetch(res, n = -1),
-             error = function(c) {
-               message("* Reloading Connection...")
-               conn <- new_connection()
-               res <- RJDBC::dbSendQuery(conn, query)
-               RJDBC::fetch(res, n = -1)
-             }
-           )
+  tryCatch({res <- RJDBC::dbSendQuery(conn, query)
+            RJDBC::fetch(res, n = -1)},
+           error = function(c) {
+             message("* Error Occurred, Reloading Reload Connection...")
+             tryCatch( {
+               suppressMessages(conn <- new_connection());
+               res <- RJDBC::dbSendQuery(conn, query);}
+               ,error = function(c) {
+                 message('* Reloading the Connection did not fix the Error.'); 
+                 message(c) })
+           }
+  )
 }
-
