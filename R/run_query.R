@@ -18,7 +18,7 @@ run_query <- function(query, conn = last_connection()) {
     error = function(c) {
       message("* Error Occurred, Reloading Connection...")
       tryCatch({
-        suppressMessages(conn <- postgresql_connection(getOption('database.yml'), strict = FALSE));
+        suppressMessages(conn <- postgresql_connection(attr(conn, 'database.yml'), strict = FALSE));
         db_query(query, conn);
       },
       error = function(c) {

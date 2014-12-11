@@ -54,6 +54,7 @@ postgresql_connection <- function(database.yml, env = 'development',
     else return(NULL)
   }
   if (verbose) message("* Postgresql connection loaded...\n")
+  attr(database.connection, 'database.yml') <- database.yml
   set_cache(database.connection, 'last_connection')
   database.connection
 }
