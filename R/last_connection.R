@@ -17,4 +17,3 @@ last_connection <- function() {
        file.path(syberia_root(), 'config', 'database.yml'))
    else NULL)
 }
-

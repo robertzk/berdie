@@ -35,8 +35,8 @@ postgresql_connection <- function(database.yml, env = 'development',
     stop(pp("Unable to load database settings from config/database.yml ",
             "for environment '#{env}'"))
   config.database <- config.database[[env]]
-  
-  jdbc.jar <- file.path(find.package('berdie'), 'vendor', 'jars', 
+
+  jdbc.jar <- file.path(find.package('berdie'), 'vendor', 'jars',
                         'postgresql-9.2-1003.jdbc4.jar')
   pgsql <- JDBC("org.postgresql.Driver", jdbc.jar, "`")
   stopifnot(all(c('database', 'username') %in% names(config.database)))
