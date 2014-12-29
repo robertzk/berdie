@@ -16,7 +16,7 @@ notifications:
     on_failure: change
   hipchat:
     rooms:
-      secure: fS289UD6L0P5NyqufWJSgOc2aH2tp9Vkn6BOLMFbVuXSBCillt7FEDILwDBhW2DEmfpn/zgrusrJp46009YdZMlKvAJ8Jjzod2ObxC5tvXw1/oF1EYmMiuT4qFayxDk9D2qzl0NQ18K9lCw087oo5AC3TpOEVaDLcFCBF3tWAew=
+      secure: sOcQV3lgEammE9aAsWpsT+0DM+MxBPU+SFenpyLKk7VaG0hCMwLI0Kj+gmFxbx5sdOsA+hKvVa4oE37vxzmjEDyMyyUM049qYkMIEDz+ByYaekYOreGYYwr/e5Ne/IG9kJBcKyq54VE44OdOIwWnU0Zq+3GzVcR1T/K3HfJKmn8=
     on_success: change
     on_failure: change
     template:
