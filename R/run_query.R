@@ -1,5 +1,5 @@
 #' Run an SQL query and return the results as a data.frame
-#'
+#' @name run_query
 #' @param query character. The SQL query to run. This can also be left
 #'   blank to obtain the latest database connection.
 #' @param conn JDBCConnection. The database connection to use. By default

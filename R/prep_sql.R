@@ -1,4 +1,5 @@
 #' Converts .SQL files (or other readable files) into a format readable by the run_query() function.
+#'
 #' @param path_to_query character.  The filepath of the SQL file to be formatted.  This should contain the SQL code, can be .SQL or other readable type.
 #' @return string of condensed SQL query with '--' comments removed and spacing reduced 
 #' @examples 

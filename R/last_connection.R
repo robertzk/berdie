@@ -1,5 +1,5 @@
 #' The last database connection initiated by this package
-#'
+#' @name last_connection
 #' @return the latest database connection initiated by this package.
 #'   If none exists, the option \code{database.yml} will be used to
 #'   attempt to load one from a database.yml file. If this option or file

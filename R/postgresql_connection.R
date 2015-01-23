@@ -11,7 +11,7 @@
 #'   port: <port #>
 #'   username: <username>
 #'   password: <password>
-#'
+#' @name postgresql_connection
 #' @param database.yml character. The location of the database.yml file
 #'   to use. This could, for example, be directory from a Rails project.
 #' @param env character. What environment to use. The default is
