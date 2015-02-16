@@ -1,11 +1,17 @@
 language: c
+jdk:
+  - openjdk7
+install: true
 before_install:
 - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
 - chmod 755 ./travis-tool.sh
 - "./travis-tool.sh bootstrap"
+before_script:
+- psql -c 'create database travis;' -U postgres
 install:
 - "./travis-tool.sh install_deps"
-- "./travis-tool.sh install_r yaml RJDBC RPostgreSQL testthat knitr devtools"
+- "sudo R CMD javareconf"
+- "./travis-tool.sh install_r yaml rJava RJDBC RPostgreSQL testthat knitr devtools"
 - "./travis-tool.sh install_github robertzk/testthatsomemore"
 script: "./travis-tool.sh run_tests"
 after_failure:
