@@ -13,3 +13,9 @@ dbconn <- function() {
   conn
 }
 
+with_connection <- function(expr, conn = dbconn()) {
+  assign("conn", conn, envir = parent.frame())
+  on.exit(dbDisconnect(conn), add = TRUE)
+  eval.parent(substitute(expr))
+}
+

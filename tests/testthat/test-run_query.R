@@ -1,5 +1,7 @@
 context('run_query')
 
-test_that('it can run a simple query', {
-  expect_equal(run_query('select 1 + 1', dbconn())[[1]], 2)
+with_connection({
+  test_that('it can run a simple query', {
+    expect_equal(run_query('select 1 + 1', conn)[[1]], 2)
+  })
 })
