@@ -22,7 +22,7 @@ connection <- postgresql_connection("some/dir/database.yml")
 
 However, it is easier to let the package do its job and set either
 
-- The `database.yml` option with the location of the configuration file.
+- The `berdie.database.yml` option with the location of the configuration file.
   You can ensure this always runs on startup by placing it in your `~/.Rprofile` file
   with `options(database.yml = "some/dir/database.yml")`.
 
@@ -49,7 +49,7 @@ df <- run_query("select * from some_table limit 5")
 
 The default is to use the helper function `last_connection()`, which will attempt
 to look for: (1) the previous connection used for a query execution,
-(2) load the connection from the `database.yml` global option, or (3) borrow
+(2) load the connection from the `berdie.database.yml` global option, or (3) borrow
 the database.yml file from a syberia project.
 
 Whatever the case, you can always inspect the connection used by the previous query
