@@ -1,18 +1,17 @@
 language: c
 jdk:
-  - openjdk7
-install: true
+- openjdk7
+install:
+- "./travis-tool.sh install_deps"
+- sudo R CMD javareconf
+- "./travis-tool.sh install_r yaml rJava RJDBC RPostgreSQL testthat knitr devtools"
+- "./travis-tool.sh install_github robertzk/testthatsomemore"
 before_install:
 - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
 - chmod 755 ./travis-tool.sh
 - "./travis-tool.sh bootstrap"
 before_script:
 - psql -c 'create database travis;' -U postgres
-install:
-- "./travis-tool.sh install_deps"
-- "sudo R CMD javareconf"
-- "./travis-tool.sh install_r yaml rJava RJDBC RPostgreSQL testthat knitr devtools"
-- "./travis-tool.sh install_github robertzk/testthatsomemore"
 script: "./travis-tool.sh run_tests"
 after_failure:
 - "./travis-tool.sh dump_logs"
@@ -22,7 +21,7 @@ notifications:
     on_failure: change
   hipchat:
     rooms:
-      secure: fS289UD6L0P5NyqufWJSgOc2aH2tp9Vkn6BOLMFbVuXSBCillt7FEDILwDBhW2DEmfpn/zgrusrJp46009YdZMlKvAJ8Jjzod2ObxC5tvXw1/oF1EYmMiuT4qFayxDk9D2qzl0NQ18K9lCw087oo5AC3TpOEVaDLcFCBF3tWAew=
+      secure: fBrHwMoboLH0pv/xqCA6aiSQRpFkKz0K+eqXtywJGhsHl3abt+BdzsEsBqwoTZxNplrpnR+UcH3IWSE/ijL5turjJgyBs/SouwxE+8o1Zuwx8ILRlsTe82RK5+PifvXc3n4BHX00U2N8pjiPqNkY3to9KvjIercYYVpCfXv4V8s=
     on_success: change
     on_failure: change
     template:
