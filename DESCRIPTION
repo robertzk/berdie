@@ -11,7 +11,8 @@ Depends:
 Imports:
     yaml,
     RJDBC,
-    RPostgreSQL
+    RPostgreSQL,
+    syberiaStructure
 Suggests:
     testthat,
     knitr,
