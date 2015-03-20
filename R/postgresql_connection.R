@@ -22,6 +22,7 @@
 #' @export
 postgresql_connection <- function(database.yml, env = 'development',
                                   verbose = TRUE, strict = TRUE) {
+  stopifnot(is.character(env))
   if (is.null(database.yml)) { if (strict) stop('database.yml is NULL') else return(NULL) }
   if (!file.exists(database.yml)) {
     if (strict) stop("Provided database.yml file does not exist: ", database.yml)
@@ -31,9 +32,9 @@ postgresql_connection <- function(database.yml, env = 'development',
   if (verbose) message("* Loading postgresql connection...\n")
   database.yml <- paste(readLines(database.yml), collapse = "\n")
   config.database <- yaml.load(database.yml)
-  if (!env %in% names(config.database))
+  if (!env[1] %in% names(config.database))
     stop(pp("Unable to load database settings from config/database.yml ",
-            "for environment '#{env}'"))
+            "for environment '#{paste(env, collapse='/')}'"))
   config.database <- config.database[[env]]
   
   jdbc.jar <- file.path(find.package('berdie'), 'vendor', 'jars', 
