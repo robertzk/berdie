@@ -34,8 +34,8 @@ postgresql_connection <- function(database.yml, env = 'development',
   config.database <- yaml.load(database.yml)
   if (!env[1] %in% names(config.database))
     stop(pp("Unable to load database settings from config/database.yml ",
-            "for environment '#{env}'"))
-  config.database <- Reduce(`[[`, config.database, env)
+            "for environment '#{paste(env, collapse='/')}'"))
+  config.database <- config.database[[env]]
   
   jdbc.jar <- file.path(find.package('berdie'), 'vendor', 'jars', 
                         'postgresql-9.2-1003.jdbc4.jar')
