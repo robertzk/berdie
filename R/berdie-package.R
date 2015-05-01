@@ -2,5 +2,5 @@
 #'
 #' @docType package
 #' @name berdie
-#' @import yaml RJDBC RPostgreSQL
+#' @import yaml DBI RJDBC RPostgreSQL
 NULL

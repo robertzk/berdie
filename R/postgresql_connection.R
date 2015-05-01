@@ -39,7 +39,7 @@ postgresql_connection <- function(database.yml, env = 'development',
   
   jdbc.jar <- file.path(find.package('berdie'), 'vendor', 'jars', 
                         'postgresql-9.2-1003.jdbc4.jar')
-  pgsql <- JDBC("org.postgresql.Driver", jdbc.jar, "`")
+  pgsql <- RJDBC::JDBC("org.postgresql.Driver", jdbc.jar, "`")
   stopifnot(all(c('database', 'username') %in% names(config.database)))
   conn.url <- c('jdbc:postgresql://', config.database$host %||% '127.0.0.1', ':',
                 config.database$port %||% '5432', '/', config.database$database, '?user=',

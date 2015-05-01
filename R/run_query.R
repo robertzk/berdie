@@ -13,9 +13,14 @@
 #'   dependending on your configuration. See \code{\link{last_connection}}.)
 run_query <- function(query, conn = last_connection()) {
   if (missing(query)) return(last_connection())
-  stopifnot(is(conn, 'JDBCConnection')) 
+  stopifnot(is(conn, 'JDBCConnection') || is(conn, 'DBIConnection')) 
   stopifnot(is.character(query))
-  res <- RJDBC::dbSendQuery(conn, query)
-  RJDBC::fetch(res, n = -1)
+  if (is(conn, 'JDBCConnection')) {
+    res <- RJDBC::dbSendQuery(conn, query)
+    RJDBC::fetch(res, n = -1)
+  } else {
+    res <- DBI::dbSendQuery(conn, query)
+    DBI::fetch(res, n = -1)
+  }
 }
 

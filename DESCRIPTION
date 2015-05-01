@@ -10,6 +10,7 @@ Depends:
     R (>= 3.0.0)
 Imports:
     yaml,
+    DBI,
     RJDBC,
     RPostgreSQL,
     syberiaStructure
