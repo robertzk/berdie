@@ -12,7 +12,7 @@
 last_connection <- function() {
   get_cache('last_connection') %||%
   postgresql_connection(getOption('berdie.database.yml'), strict = FALSE) %||%
-  (if ('syberia' %in% loaded_packages())
+  (if ('syberia' %in% .packages())
      postgresql_connection(strict = FALSE,
        file.path(syberiaStructure::syberia_root(), 'config', 'database.yml'))
    else NULL)
