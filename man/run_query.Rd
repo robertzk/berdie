@@ -10,7 +10,7 @@ run_query(query, conn = last_connection())
 \item{query}{character. The SQL query to run. This can also be left
 blank to obtain the latest database connection.}
 
-\item{conn}{JDBCConnection. The database connection to use. By default
+\item{conn}{PqConnection. The database connection to use. By default
 this is the last connection opened with this package, or if non-existent,
 a new connection using \code{getOption('database.yml')}.}
 }

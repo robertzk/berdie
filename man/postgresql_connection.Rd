@@ -18,7 +18,7 @@ to use. This could, for example, be directory from a Rails project.}
 loading is in progress.}
 }
 \value{
-JDBCConnection representing the activated PostGreSQL connection.
+PqConnection representing the activated PostGreSQL connection.
 }
 \description{
 By default, this function will read from the `development` environment.
