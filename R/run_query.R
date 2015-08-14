@@ -20,10 +20,12 @@ run_query <- function(query, conn = last_connection()) {
 
 #' Lists all tables within DB 
 #'
+#' @param conn PqConnection. The database connection to use. By default
+#'   this is the last connection opened with this package, or if non-existent,
+#'   a new connection using \code{getOption('database.yml')}.
+#' @seealso \code{\link{postgresql_connection}}
 #' @export
-all_tables <- function() {
-  run_query("select table_name
-             from information_schema.tables
-             where table_schema = 'public'"
-           )$table_name
+all_tables <- function(conn = last_connection()) {
+  stopifnot(is(conn, 'PqConnection'))
+  DBI::dbListTables(conn)
 }
