@@ -17,3 +17,13 @@ run_query <- function(query, conn = last_connection()) {
   stopifnot(is.character(query))
   DBI::dbGetQuery(conn, query)
 }
+
+#' Lists all tables within DB 
+#'
+#' @export
+all_tables <- function() {
+  berdie::run_query("select table_name
+                     from information_schema.tables
+                     where table_schema = 'public'"
+                   )$table_name
+}
