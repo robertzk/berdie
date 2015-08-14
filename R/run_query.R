@@ -22,8 +22,8 @@ run_query <- function(query, conn = last_connection()) {
 #'
 #' @export
 all_tables <- function() {
-  berdie::run_query("select table_name
-                     from information_schema.tables
-                     where table_schema = 'public'"
-                   )$table_name
+  run_query("select table_name
+             from information_schema.tables
+             where table_schema = 'public'"
+           )$table_name
 }
