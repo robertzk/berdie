@@ -1,4 +1,3 @@
 library(testthat)
 library(berdie)
-
-test_check("berdie")
+test_package("berdie")
