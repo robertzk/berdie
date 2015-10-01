@@ -10,11 +10,20 @@
 #' @seealso \code{\link{postgresql_connection}}
 #' @export
 last_connection <- function() {
-  get_cache('last_connection') %||%
+  conn <- get_cache('last_connection')
+  if (is(conn, "error")) {
+    conn <- NULL
+  }
+  if (is(conn, 'PqConnection')) {
+    isValidConnection <- tryCatch(dbIsValid(dbSendQuery(conn, 'select 1')), error = function(e) FALSE)
+    if (!isValidConnection)
+      conn <- NULL
+  }
+
+  conn %||%
   postgresql_connection(getOption('berdie.database.yml'), strict = FALSE) %||%
   (if ('syberia' %in% .packages())
      postgresql_connection(strict = FALSE,
        file.path(syberiaStructure::syberia_root(), 'config', 'database.yml'))
    else NULL)
 }
-
