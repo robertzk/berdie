@@ -11,8 +11,7 @@ Depends:
 Imports:
     yaml,
     RPostgres,
-    DBI,
-    syberiaStructure
+    DBI
 Suggests:
     Rcpp,
     testthat,
